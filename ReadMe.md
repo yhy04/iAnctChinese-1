@@ -10,8 +10,6 @@
 	2.style.css样式文件
 	3.images图片资源
 
-![c609c34cfc045937850cdb902cdc5c4](C:\Users\zsy\Documents\WeChat Files\wxid_sjdxdlvajry012\FileStorage\Temp\c609c34cfc045937850cdb902cdc5c4.png)
-
-![image-20241030101340691](C:\Users\zsy\AppData\Roaming\Typora\typora-user-images\image-20241030101340691.png)
-
-![71d56d037b0c9d17f7262092a3f8b71](C:\Users\zsy\Documents\WeChat Files\wxid_sjdxdlvajry012\FileStorage\Temp\71d56d037b0c9d17f7262092a3f8b71.png)
+![image](https://github.com/spadeplace/iAnctChinese/blob/master/images/1.png)
+![image](https://github.com/spadeplace/iAnctChinese/blob/master/images/2.png)
+![image](https://github.com/spadeplace/iAnctChinese/blob/master/images/3.png)
