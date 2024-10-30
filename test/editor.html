@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吾与点智能标注平台</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #f5f5f5;
+            padding: 20px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            margin-left: 60px;
+            flex: 1;
+            font-size: 16px;
+            font-weight: bold;
+            color: #41466E;
+        }
+
+        .document-management {
+            flex: 1.5;
+            text-align: left;
+        }
+
+        .document-management span {
+            display: inline-block;
+            background-color: #41466E;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+
+        .container {
+            width: 80%;
+        
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .icons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .icons img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .separator {
+            border-bottom: 1px solid #ddd;
+            margin: 10px 0;
+        }
+
+        .text-area {
+            width: 100%;
+            height: 500px;
+            padding: 10px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .word-count {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">吾与点 智能标注平台</div>
+        <div class="document-management"><span><b>结构标注</b></span></div>
+    </header>
+    <div class="container">
+        <div class="icons">
+            <img src="imges/搜索.png" alt="查询" title="查询" onclick="alert('执行查询功能')">
+            <img src="imges/复制文件.png" alt="复制" title="复制" onclick="copyText()">
+            <img src="imges/剪切.png" alt="剪切" title="剪切" onclick="cutText()">
+            <img src="imges/paste.png" alt="粘贴" title="粘贴" onclick="pasteText()">
+        </div>
+        <div class="separator"></div>
+        <textarea class="text-area" id="text-area" oninput="updateWordCount()"></textarea>
+        <div class="word-count" id="word-count">已输入 0 字</div>
+    </div>
+
+    <script>
+        function updateWordCount() {
+            const text = document.getElementById('text-area').value;
+            const wordCount = text.length;
+            document.getElementById('word-count').innerText = `已输入 ${wordCount} 字`;
+        }
+
+        function copyText() {
+            const textArea = document.getElementById('text-area');
+            textArea.select();
+            document.execCommand('copy');
+            alert('文本已复制');
+        }
+
+        function cutText() {
+            const textArea = document.getElementById('text-area');
+            textArea.select();
+            document.execCommand('cut');
+            alert('文本已剪切');
+        }
+
+        function pasteText() {
+            navigator.clipboard.readText().then(text => {
+                const textArea = document.getElementById('text-area');
+                textArea.value += text;
+                updateWordCount();
+            }).catch(err => {
+                alert('粘贴失败，请允许访问剪贴板');
+            });
+        }
+    </script>
+
+</body>
+
+</html>
