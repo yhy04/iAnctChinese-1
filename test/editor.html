@@ -4,102 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吾与点智能标注平台</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            background-color: #f5f5f5;
-            padding: 20px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            margin-left: 60px;
-            flex: 1;
-            font-size: 16px;
-            font-weight: bold;
-            color: #41466E;
-        }
-
-        .document-management {
-            flex: 1.5;
-            text-align: left;
-        }
-
-        .document-management span {
-            display: inline-block;
-            background-color: #41466E;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-
-        .container {
-            width: 80%;
-        
-            margin: 20px auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .icons {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .icons img {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-        }
-
-        .separator {
-            border-bottom: 1px solid #ddd;
-            margin: 10px 0;
-        }
-
-        .text-area {
-            width: 100%;
-            height: 500px;
-            padding: 10px;
-            border: none;
-            outline: none;
-            resize: none;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .word-count {
-            text-align: right;
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-        }
-    </style>
+    <title>智能标注平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
     <header>
-        <div class="logo">吾与点 智能标注平台</div>
-        <div class="document-management"><span><b>结构标注</b></span></div>
+        <div class="logo">智能标注平台</div>
+        <div class="document-management">
+            <span class="nav-button"><b>结构标注</b></span>
+            <span class="nav-button" onclick="performNER()">实体标注</span>
+            <span class="nav-button" onclick="showRelationAnnotation()">关系标注</span>
+            <span class="nav-button" onclick="showKnowledgeGraph()">知识图谱</span>
+            <span class="nav-button" onclick="exportAllData()">导出数据</span>
+        </div>
     </header>
+
     <div class="container">
         <div class="icons">
             <img src="imges/搜索.png" alt="查询" title="查询" onclick="alert('执行查询功能')">
@@ -112,37 +34,16 @@
         <div class="word-count" id="word-count">已输入 0 字</div>
     </div>
 
-    <script>
-        function updateWordCount() {
-            const text = document.getElementById('text-area').value;
-            const wordCount = text.length;
-            document.getElementById('word-count').innerText = `已输入 ${wordCount} 字`;
-        }
+    <div id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
 
-        function copyText() {
-            const textArea = document.getElementById('text-area');
-            textArea.select();
-            document.execCommand('copy');
-            alert('文本已复制');
-        }
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">标注结果</div>
+        <div class="sidebar-content" id="sidebar-content"></div>
+    </div>
 
-        function cutText() {
-            const textArea = document.getElementById('text-area');
-            textArea.select();
-            document.execCommand('cut');
-            alert('文本已剪切');
-        }
-
-        function pasteText() {
-            navigator.clipboard.readText().then(text => {
-                const textArea = document.getElementById('text-area');
-                textArea.value += text;
-                updateWordCount();
-            }).catch(err => {
-                alert('粘贴失败，请允许访问剪贴板');
-            });
-        }
-    </script>
+    <div id="knowledge-graph"></div>
 
 </body>
 
